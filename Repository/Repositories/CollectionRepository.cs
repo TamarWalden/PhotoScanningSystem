@@ -25,7 +25,7 @@ namespace Repository.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Collection> GetByIdAsync(int id)
+        public Task<Collection> GetByIdAsync(string id)
         {
             throw new NotImplementedException();
         }

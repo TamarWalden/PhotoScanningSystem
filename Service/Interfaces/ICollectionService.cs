@@ -1,4 +1,5 @@
-﻿using Repository.Entities;
+﻿using Common.DTO_s;
+using Repository.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Service.Interfaces
 {
     public interface ICollectionService
     {
-        Task<Collection> GetCollection(int collectionSymbolization);
+        Task<CollectionDTO> GetCollection(string collectionSymbolization);
         Task CreateDocumentationFile();
         Task UploadImage();
     }

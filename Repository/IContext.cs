@@ -10,7 +10,7 @@ namespace Repository
     public interface IContext
     {
         public List<Collection> Collections { get; set; }
-        public List<Image> Pictures { get; set; }
+        public List<Image> Images { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
 

@@ -1,5 +1,8 @@
-﻿using Repository.Entities;
+﻿using AutoMapper;
+using Common.DTO_s;
+using Repository.Entities;
 using Repository.Interfaces;
+using Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,19 +11,23 @@ using System.Threading.Tasks;
 
 namespace Service.Services
 {
-    public class CollectionService
+    public class CollectionService:ICollectionService
     {
         private readonly IRepository<Collection> collectionRepository;
-        public CollectionService(IRepository<Collection> collectionRepository)
+        private readonly IMapper mapper;
+
+        public CollectionService(IRepository<Collection> collectionRepository, IMapper mapper)
         {
             this.collectionRepository = collectionRepository;
+            this.mapper = mapper;
         }
 
-        public async Task<Collection> GetCollection(int collectionSymbolization)
+        public async Task<CollectionDTO> GetCollection(string collectionSymbolization)
         {
             try
             {
-                return await collectionRepository.GetByIdAsync(collectionSymbolization);
+                var collection = await collectionRepository.GetByIdAsync(collectionSymbolization);
+                return mapper.Map<CollectionDTO>(collection);
             }
             catch (Exception ex)
             {

@@ -8,7 +8,7 @@ namespace Repository.Interfaces
 {
     public interface IRepository<T>
     {
-        Task<T> GetByIdAsync(int id);
+        Task<T> GetByIdAsync(string id);
         Task<T> UpdateAsync(T entity);
         Task<List<T>> GetAllAsync();
         Task<T> AddAsync(T entity);
