@@ -1,0 +1,6 @@
+@PhotoScanningSystem_HostAddress = http://localhost:5010
+
+GET {{PhotoScanningSystem_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
