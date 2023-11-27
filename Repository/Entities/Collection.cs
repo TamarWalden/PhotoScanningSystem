@@ -8,8 +8,7 @@ namespace Repository.Entities
 {
     public class Collection
     {
-        public int CollectionSymbolization { get; set; }
-            
+        public string CollectionSymbolization { get; set; }      
         public string Title { get; set; }
         public string ItemId { get; set; }
         public List<Image> Images { get; set; }
