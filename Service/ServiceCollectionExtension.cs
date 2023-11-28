@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using JsonContext;
+using Microsoft.Extensions.DependencyInjection;
 using Repository;
 using Service.Interfaces;
 using Service.Services;
@@ -11,8 +12,8 @@ namespace Service
         {
             services.AddRepositories();
             services.AddScoped<ICollectionService, CollectionService>();
-           // services.AddSingleton<IContext, AssignmentsContext>();
-           // services.AddAutoMapper(typeof(Mapper));
+            services.AddSingleton<IContext, CollectionContext>();
+            services.AddAutoMapper(typeof(Mapper));
         }
     }
 }

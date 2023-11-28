@@ -26,8 +26,9 @@ namespace Service.Services
         {
             try
             {
-                var collection = await collectionRepository.GetByIdAsync(collectionSymbolization);
-                return mapper.Map<CollectionDTO>(collection);
+                var collections= await collectionRepository.GetAllAsync();
+                List<CollectionDTO> collectionsDTO= mapper.Map<List<CollectionDTO>>(collections);
+                return collectionsDTO.FirstOrDefault(c => c.CollectionSymbolization == collectionSymbolization);
             }
             catch (Exception ex)
             {

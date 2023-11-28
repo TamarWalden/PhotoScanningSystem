@@ -1,4 +1,5 @@
-﻿using Repository;
+﻿using Newtonsoft.Json;
+using Repository;
 using Repository.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,18 +11,25 @@ namespace JsonContext
 {
     public class CollectionContext:IContext
     {
-        private List<Image> images = new List<Image>();
+        string filePath = @"CollectionsFile.json";
+        
 
-        public List<Image> Images
+        public CollectionContext()
         {
-            get { return images; }
-            set { images = value; }
         }
 
-        public List<Collection> Collections {  get; set; }    
-        public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public async Task<List<Collection>> LoadCollectionsFromFileAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                string json = await File.ReadAllTextAsync(filePath);
+                var _collections = JsonConvert.DeserializeObject<List<Collection>>(json);
+                return _collections;
+            }
+            catch (Exception ex)
+            {
+                return new List<Collection>();
+            }
         }
     }
 }

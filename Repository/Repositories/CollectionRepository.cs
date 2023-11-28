@@ -10,6 +10,11 @@ namespace Repository.Repositories
 {
     public class CollectionRepository : IRepository<Collection>
     {
+        private readonly IContext context;
+        public CollectionRepository(IContext context)
+        {
+            this.context = context;
+        }
         public Task<Collection> AddAsync(Collection entity)
         {
             throw new NotImplementedException();
@@ -20,9 +25,16 @@ namespace Repository.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<List<Collection>> GetAllAsync()
+        public async Task<List<Collection>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await context.LoadCollectionsFromFileAsync();
+            }
+            catch (Exception e)
+            {
+                return new List<Collection>();
+            }
         }
 
         public Task<Collection> GetByIdAsync(string id)

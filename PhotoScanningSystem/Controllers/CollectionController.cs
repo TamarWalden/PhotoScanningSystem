@@ -20,7 +20,15 @@ namespace PhotoScanningSystem.Controllers
         [Route("GetCollection/{id}")]
         public async Task<CollectionDTO> GetById(string id)
         {
-            return await collectionService.GetCollection(id);
+            var collection= await collectionService.GetCollection(id);
+            return collection;
         }
+
+        //[HttpPost]
+        //[Route("SaveImeges/{images}")]
+        //public async Task<List<ImageDTO>> SaveImeges()
+        //{
+
+        //}
     }
 }
