@@ -5,12 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repository
+namespace Repository.Interfaces
 {
-    public interface IContext
+    public interface ICollectionRepository
     {
-        Task<List<Collection>> LoadCollectionsFromFileAsync();
-        Task CreateJsonFileAsync(Image image);
+        Task<List<Collection>> GetAllAsync();
         Task addImagesToFileAsync(List<Image> images, string collectionSymbolization);
     }
 }

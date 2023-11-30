@@ -14,7 +14,8 @@ namespace Service
         public Mapper()
         {
             CreateMap<CollectionDTO, Collection>().ReverseMap();
-            CreateMap<ImageDTO, Image>().ReverseMap();
+            CreateMap<Image, ImageDTO>().ForMember(dast => dast.IsSaved, opt => opt.Ignore());
+            CreateMap<ImageDTO, Image>();
         }
     }
 }

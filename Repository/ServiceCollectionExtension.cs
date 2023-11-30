@@ -14,8 +14,8 @@ namespace Repository
     {
         public static void AddRepositories(this IServiceCollection services)
         {
-            services.AddScoped<IRepository<Collection>, CollectionRepository>();
-            services.AddScoped<IRepository<Image>, ImageRepository>();
+            services.AddScoped<ICollectionRepository, CollectionRepository>();
+            services.AddScoped<IImageRepository, ImageRepository>();
         }
     }
 }

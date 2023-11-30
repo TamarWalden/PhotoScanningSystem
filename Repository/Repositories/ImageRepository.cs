@@ -8,30 +8,28 @@ using System.Threading.Tasks;
 
 namespace Repository.Repositories
 {
-    public class ImageRepository : IRepository<Image>
+    public class ImageRepository : IImageRepository
     {
-        public Task<Image> AddAsync(Image entity)
+        private readonly IContext context;
+        public ImageRepository(IContext context)
         {
-            throw new NotImplementedException();
+            this.context = context;
+        }
+        public async Task CreateJsonFileAsync(Image image)
+        {
+            try
+            {
+                await context.CreateJsonFileAsync(image);
+                //TODO: check if create succese
+            }
+            catch (Exception ex) {
+                
+            }
         }
 
-        public Task DeleteAsync(int id)
+        public Task UploadImage(Image image)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Image>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Image> GetByIdAsync(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Image> UpdateAsync(Image entity)
-        {
+            //TODO: upload image
             throw new NotImplementedException();
         }
     }

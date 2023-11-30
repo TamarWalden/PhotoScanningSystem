@@ -13,12 +13,14 @@ namespace Service.Services
 {
     public class CollectionService:ICollectionService
     {
-        private readonly IRepository<Collection> collectionRepository;
+        private readonly ICollectionRepository collectionRepository;
+        private readonly IImageRepository imageRepository;
         private readonly IMapper mapper;
 
-        public CollectionService(IRepository<Collection> collectionRepository, IMapper mapper)
+        public CollectionService(ICollectionRepository collectionRepository, IImageRepository imageRepository, IMapper mapper)
         {
             this.collectionRepository = collectionRepository;
+            this.imageRepository = imageRepository;
             this.mapper = mapper;
         }
 
@@ -36,14 +38,42 @@ namespace Service.Services
             }
         }
 
-        public async Task CreateDocumentationFile()
+        private async Task CreateDocumentationFile(Image image)
         {
+            try
+            {
+                await imageRepository.CreateJsonFileAsync(image);
+            }
+            catch (Exception ex) { }
 
         }
 
-        public async Task UploadImage()
+        private async Task addImagesToFileAsync(List<Image> images)
         {
+            try
+            {
+                await collectionRepository.addImagesToFileAsync(images, images[0].CollectionSymbolization);
+            }
+            catch(Exception ex) { }
+        }
 
+        public async Task UploadImages(List<ImageDTO> images)
+        {
+            try
+            {
+                foreach (var image in images)
+                {
+                    if (image.IsSaved == false)
+                    {
+                        var imageEntity=mapper.Map<Image>(image);
+                        //await imageRepository.UploadImage(imageEntity);
+                        await CreateDocumentationFile(imageEntity);
+                    }
+                }
+                var imagesEntities = mapper.Map<List<Image>>(images);
+                addImagesToFileAsync(imagesEntities);
+            }
+            catch (Exception ex) { }
         }
     }
 }

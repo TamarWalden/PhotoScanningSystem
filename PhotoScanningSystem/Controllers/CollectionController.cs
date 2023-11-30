@@ -21,14 +21,18 @@ namespace PhotoScanningSystem.Controllers
         public async Task<CollectionDTO> GetById(string id)
         {
             var collection= await collectionService.GetCollection(id);
+            collection.Images.ForEach(image => image.IsSaved = true);
             return collection;
         }
 
-        //[HttpPost]
-        //[Route("SaveImeges/{images}")]
-        //public async Task<List<ImageDTO>> SaveImeges()
-        //{
-
-        //}
+        [HttpPost]
+        [Route("SaveImeges/")]
+        public async Task<List<ImageDTO>> SaveImeges(List<ImageDTO> images)
+        {
+            await collectionService.UploadImages(images);
+            //TODO: check if save succese
+            images.ForEach(image => image.IsSaved = true);
+            return images;
+        }
     }
 }

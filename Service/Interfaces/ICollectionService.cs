@@ -11,7 +11,6 @@ namespace Service.Interfaces
     public interface ICollectionService
     {
         Task<CollectionDTO> GetCollection(string collectionSymbolization);
-        Task CreateDocumentationFile();
-        Task UploadImage();
+        Task UploadImages(List<ImageDTO> images);
     }
 }

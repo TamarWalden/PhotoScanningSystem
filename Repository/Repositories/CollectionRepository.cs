@@ -8,21 +8,12 @@ using System.Threading.Tasks;
 
 namespace Repository.Repositories
 {
-    public class CollectionRepository : IRepository<Collection>
+    public class CollectionRepository : ICollectionRepository
     {
         private readonly IContext context;
         public CollectionRepository(IContext context)
         {
             this.context = context;
-        }
-        public Task<Collection> AddAsync(Collection entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<List<Collection>> GetAllAsync()
@@ -36,15 +27,13 @@ namespace Repository.Repositories
                 return new List<Collection>();
             }
         }
-
-        public Task<Collection> GetByIdAsync(string id)
+        public async Task addImagesToFileAsync(List<Image> images, string collectionSymbolization)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<Collection> UpdateAsync(Collection entity)
-        {
-            throw new NotImplementedException();
+            try
+            {
+                await context.addImagesToFileAsync(images, collectionSymbolization);
+            }
+            catch (Exception e) { }
         }
     }
 }

@@ -11,6 +11,6 @@ namespace Common.DTO_s
         public string CollectionSymbolization { get; set; }
         public string Title { get; set; }
         public string ItemId { get; set; }
-        //public List<ImageDTO> Images { get; set; }
+        public List<ImageDTO> Images { get; set; }
     }
 }
